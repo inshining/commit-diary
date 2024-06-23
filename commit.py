@@ -109,9 +109,14 @@ def get_commit_messages(repo_full_name, branch='main', token=None, since=None, u
 
     return commit_messages
 
+def get_iso_date(date_time):
+    """Returns ISO FORMAT + Z from datetime"""
+    return date_time.isoformat() + 'Z'
+
+
 start_of_week, end_of_week = get_current_week_range()
-since_date = start_of_week.isoformat() + 'Z'
-until_date = end_of_week.isoformat() + 'Z'
+since_date = get_iso_date(start_of_week)
+until_date = get_iso_date(end_of_week)
 
 repositories = get_user_commits(username, token, since_date)
 
