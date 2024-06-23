@@ -18,8 +18,8 @@ def get_current_week_range():
     end_of_week = start_of_week + timedelta(days=6)  # Sunday
     return start_of_week, end_of_week
 
-def get_user_commits(username, token, since):
-    """Fetch commits made by the user since the specified date."""
+def get_repos_committed(username, token, since):
+    """Fetch Repos that have committed by the user since the specified date."""
     url = "https://api.github.com/search/commits"
     headers = {
         'Authorization': f'token {token}',
@@ -118,7 +118,7 @@ start_of_week, end_of_week = get_current_week_range()
 since_date = get_iso_date(start_of_week)
 until_date = get_iso_date(end_of_week)
 
-repositories = get_user_commits(username, token, since_date)
+repositories = get_repos_committed(username, token, since_date)
 
 if not repositories:
     print("No repositories found with commits this week.")
